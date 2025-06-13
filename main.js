@@ -1,12 +1,10 @@
-const express = require('express')
-const app = express();
-const port = 5000
+const jsonServer = require('json-server')
+const server = jsonServer.create()
+const router = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
 
-
-app.get("/",(req , res)=>{
-    res.send("hello from backend")
-} )
-
-app.listen(port ,()=>{
-    console.log(`${port}`)
+server.use(middlewares)
+server.use(router)
+server.listen(process.env.PORT || 3000, () => {
+    console.log('JSON Server is running')
 })
